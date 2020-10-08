@@ -6,7 +6,11 @@
       :clipped="clipped"
       fixed
       app
+      class="elevation-4"
     >
+      <nuxt-link class="d-flex justify-center" to="/home">
+        <img class="my-10 logo hidden-md-and-down" src="~/assets/logo.png" />
+      </nuxt-link>
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -16,29 +20,26 @@
           exact
         >
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon color="indigo darken-4">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title
+              class="font-weight-bold indigo--text text--darken-4"
+              v-text="item.title"
+            />
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <nuxt-link class="d-flex justify-center button-logout" to="/">
+        <v-btn width="90%" class="white--text" color="light-blue darken-3">
+          LOGOUT
+        </v-btn>
+      </nuxt-link>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
+    <v-app-bar :clipped-left="clipped" fixed app color="light-blue darken-3">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="white" />
+      <v-btn icon @click.stop="miniVariant = !miniVariant" color="white">
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-app-bar>
     <v-main>
@@ -56,9 +57,6 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
@@ -67,25 +65,39 @@ export default {
   data() {
     return {
       clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
+          icon: 'mdi-ruler',
+          title: 'Rule',
+          to: '/rule',
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
+          icon: 'mdi-image-frame',
+          title: 'Content',
+          to: '/content',
+        },
+        {
+          icon: 'mdi-clipboard-edit',
+          title: 'Report Builder',
+          to: '/report-builder',
         },
       ],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
     }
   },
 }
 </script>
+<style scoped>
+.button-logout {
+  position: absolute;
+  bottom: 4%;
+  width: 100%;
+}
+
+.logo {
+  max-width: 80%;
+}
+</style>
