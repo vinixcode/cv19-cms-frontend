@@ -1,4 +1,4 @@
-<template>
+<template >
   <v-layout align-center="center" justify-center="center">
     <v-flex xs12>
       <v-card class="py-10 pt-10 my-10 px-5 mx-auto" max-width="400" elevation="4">
@@ -62,4 +62,5 @@
   top: -15%;
   left: 38%;
 }
+
 </style>
