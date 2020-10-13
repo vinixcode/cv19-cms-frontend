@@ -6,7 +6,7 @@
         max-width="400"
         elevation="4"
       >
-        <v-form ref="form" v-model="valid" class="text-center">
+        <v-form ref="form" class="text-center">
           <v-avatar
             color="primary"
             size="95"
@@ -28,11 +28,7 @@
           ></v-text-field>
 
           <div class="d-flex justify-space-around">
-            <v-checkbox
-              v-model="checkbox1"
-              label="Remember me"
-              class="mt-0 pt-0"
-            ></v-checkbox>
+            <v-checkbox label="Remember me" class="mt-0 pt-0"></v-checkbox>
 
             <a href="#" class="pb-4 font-italic">Forgot password?</a>
           </div>
