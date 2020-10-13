@@ -3,7 +3,7 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Environment variables
   env: {
-    backendUrl: process.env.BACKEND_URL || 'http://localhost:8000',
+    backendUrl: process.env.BACKEND_URL || 'https://localhost:8000',
   },
 
   // Target (https://go.nuxtjs.dev/config-target)
