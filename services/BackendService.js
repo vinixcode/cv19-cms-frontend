@@ -7,4 +7,10 @@ export default {
   getContent() {
     return api.get('/content')
   },
+  getAContent(id) {
+    return api.get(`/content/${id}`)
+  },
+  createContent(data) {
+    return api.post('/content', data)
+  },
 }

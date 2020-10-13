@@ -15,11 +15,13 @@
         <v-form ref="form" class="text-center mx-5">
           <div>
             <v-text-field
+              v-model="content.code"
               filled
               prepend-inner-icon="mdi-xml"
               placeholder="Code"
             ></v-text-field>
             <v-text-field
+              v-model="content.sort"
               class="mb-8"
               filled
               hide-details
@@ -29,16 +31,19 @@
               placeholder="Sort"
             />
             <v-text-field
+              v-model="content.title"
               filled
               prepend-inner-icon="mdi-format-text"
               placeholder="Title"
             ></v-text-field>
 
-            <vue-editor v-model="content"></vue-editor>
+            <vue-editor v-model="content.body"></vue-editor>
           </div>
 
           <v-card-actions class="my-5 pl-0">
-            <v-btn color="orange darken-2" dark>Create Content</v-btn>
+            <v-btn color="orange darken-2" dark @click="createContent"
+              >Create Content</v-btn
+            >
           </v-card-actions>
 
           <!-- <v-expansion-panels v-model="panel" :readonly="readonly" multiple>
@@ -56,6 +61,7 @@
 </template>
 
 <script>
+import Backend from '@/services/BackendService.js'
 let VueEditor
 
 if (process.client) {
@@ -67,8 +73,26 @@ export default {
   },
   data() {
     return {
-      content: 'Text comment',
+      content: {
+        code: '',
+        sort: '',
+        title: '',
+        body: '',
+        language: 'EN',
+      },
     }
+  },
+  methods: {
+    createContent() {
+      const data = this.content
+      Backend.createContent(data)
+        .then((response) => {
+          this.$router.push('/content/?msg=created')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
   },
   head: {
     title: 'Create Content',
