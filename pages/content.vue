@@ -15,15 +15,16 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon color="light-blue darken-3" small class="mr-2"> mdi-eye </v-icon>
+      <v-icon color="light-blue darken-3" small class="mr-2">
+        mdi-eye {{ item }}
+      </v-icon>
     </template>
   </v-data-table>
 </template>
+
 <script>
+import Backend from '@/services/BackendService.js'
 export default {
-  head: {
-    titleTemplate: 'CONTENT',
-  },
   data: () => ({
     dialog: false,
     headers: [
@@ -39,6 +40,7 @@ export default {
   },
   methods: {
     initialize() {
+      Backend.getContent()
       this.desserts = [
         {
           name: 'Frozen Yogurt',
@@ -102,6 +104,9 @@ export default {
         },
       ]
     },
+  },
+  head: {
+    title: 'Content',
   },
 }
 </script>

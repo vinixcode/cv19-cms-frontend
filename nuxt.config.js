@@ -1,12 +1,17 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  // Environment variables
+  env: {
+    backendUrl: process.env.BACKEND_URL || 'http://localhost:8000',
+  },
+
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - cv19-cms-frontend',
+    titleTemplate: '%s - CV19 CheckUp CMS',
     title: 'cv19-cms-frontend',
     meta: [
       { charset: 'utf-8' },
@@ -62,5 +67,17 @@ export default {
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {
+    extend(config, ctx) {
+      config.module.rules.push({
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /(node_modules)/,
+        options: {
+          fix: true,
+        },
+      })
+    },
+  },
 }

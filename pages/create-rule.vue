@@ -39,7 +39,7 @@
 <script>
 export default {
   head: {
-    titleTemplate: 'CREATE RULE',
+    title: 'Create Rule',
   },
 }
 </script>

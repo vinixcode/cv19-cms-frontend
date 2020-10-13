@@ -37,8 +37,8 @@
       </nuxt-link>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app color="light-blue darken-3">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="white" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant" color="white">
+      <v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer" />
+      <v-btn icon color="white" @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
     </v-app-bar>
@@ -47,7 +47,7 @@
         <nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
+    <v-navigation-drawer :right="right" temporary fixed>
       <v-list>
         <v-list-item @click.native="right = !right"> </v-list-item>
       </v-list>

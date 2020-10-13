@@ -59,16 +59,16 @@ if (process.client) {
   VueEditor = require('vue2-editor').VueEditor
 }
 export default {
-  head: {
-    titleTemplate: 'CREATE-CONTENT',
+  components: {
+    VueEditor,
   },
   data() {
     return {
       content: 'Text comment',
     }
   },
-  components: {
-    VueEditor,
+  head: {
+    title: 'Create Content',
   },
 }
 </script>
