@@ -54,6 +54,7 @@ export default {
     headers: [
       { text: 'ID', value: 'contentId' },
       { text: 'Sort', value: 'sort' },
+      { text: 'Code', value: 'contentCode' },
       { text: 'Title', value: 'nameDisplay.displayText' },
       { text: 'Description', value: 'descDisplay.displayText' },
       { text: 'Actions', value: 'actions', sortable: false },

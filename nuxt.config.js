@@ -3,7 +3,9 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Environment variables
   env: {
-    backendUrl: process.env.BACKEND_URL || 'https://localhost:8000',
+    backendUrl:
+      process.env.BACKEND_URL ||
+      'http://cv19symfonycms-env.eba-p6xxmdyb.us-east-1.elasticbeanstalk.com',
   },
 
   // Target (https://go.nuxtjs.dev/config-target)
