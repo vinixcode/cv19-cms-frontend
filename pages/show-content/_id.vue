@@ -145,9 +145,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  color: #0277bd;
-}
 .card-content {
   background-color: #0277bd !important;
 }

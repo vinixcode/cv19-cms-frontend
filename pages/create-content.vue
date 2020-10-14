@@ -19,13 +19,6 @@
               :rules="validationRules.code"
               filled
               prepend-inner-icon="mdi-xml"
-              placeholder="ContentId"
-            ></v-text-field>
-            <v-text-field
-              v-model="content.contentCode"
-              :rules="validationRules.contentCode"
-              filled
-              prepend-inner-icon="mdi-xml"
               placeholder="Code"
             ></v-text-field>
             <v-text-field
@@ -99,17 +92,15 @@ export default {
       snackbar: false,
       errorText: '',
       content: {
-        code: '',
         sort: '',
         title: '',
         body: '',
-        contentCode: '',
+        code: '',
         language: 'EN',
       },
       validationRules: {
-        code: [(v) => !!v || 'Content Id is required'],
         sort: [(v) => !!v || 'Sort is required'],
-        contentCode: [(v) => !!v || 'Code required'],
+        code: [(v) => !!v || 'Code required'],
       },
     }
   },
