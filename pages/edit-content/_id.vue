@@ -138,7 +138,6 @@ export default {
         descDisplay: {
           displayText: '',
         },
-        language: 'EN',
       },
     }
   },
@@ -163,8 +162,6 @@ export default {
       this.content.contentId = data.contentId
       this.content.sort = data.sort
       this.content.contentCode = data.contentCode
-
-      // console.log(data.nameDisplay)
     })
   },
   methods: {

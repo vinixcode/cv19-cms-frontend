@@ -35,6 +35,14 @@
         >
           mdi-trash-can-outline
         </v-icon>
+        <v-icon
+          color="light-blue darken-3"
+          small
+          class="mr-2"
+          @click="showContent(item.contentId)"
+        >
+          mdi-eye-outline
+        </v-icon>
       </template>
     </v-data-table>
 
@@ -48,7 +56,9 @@
           <v-spacer></v-spacer>
 
           <v-btn text @click="deleteContentDialog = false">Cancel</v-btn>
-          <v-btn color="red" text @click="deleteContent()">Delete</v-btn>
+          <v-btn color="red darken-4" text @click="deleteContent()"
+            >Delete</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -112,6 +122,9 @@ export default {
     },
     editContent(id) {
       this.$router.push('/edit-content/' + id)
+    },
+    showContent(id) {
+      this.$router.push('/show-content/' + id)
     },
     dialogContent(id) {
       this.idDelele = id
