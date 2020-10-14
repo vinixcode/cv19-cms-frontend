@@ -38,7 +38,6 @@
             ></v-text-field>
             <v-text-field
               v-model="content.title"
-              :rules="validationRules.title"
               filled
               prepend-inner-icon="mdi-format-text"
               placeholder="Title"
@@ -110,10 +109,7 @@ export default {
       validationRules: {
         code: [(v) => !!v || 'Content Id is required'],
         sort: [(v) => !!v || 'Sort is required'],
-        title: [(v) => !!v || 'Title required'],
         contentCode: [(v) => !!v || 'Code required'],
-
-        // body: [(v) => !!v || 'Body is required'],
       },
     }
   },

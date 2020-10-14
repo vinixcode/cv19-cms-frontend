@@ -56,10 +56,7 @@
           </div>
 
           <v-card-actions class="mb-5 pl-0">
-            <v-btn
-              color="orange darken-2"
-              dark
-              @click="editContent(content.contentId)"
+            <v-btn color="#FEAD01" dark @click="editContent(content.contentId)"
               >Save</v-btn
             >
             <v-btn color="red darken-4" dark @click="deleteContentDialog = true"

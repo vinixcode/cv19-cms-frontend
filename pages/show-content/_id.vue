@@ -9,7 +9,7 @@
         >Back</v-btn
       >
       <v-btn
-        color="orange darken-2"
+        color="#014D4E"
         class="px-8 mr-1 mr-sm-2 mb-2"
         dark
         @click="editContent(content.contentId)"

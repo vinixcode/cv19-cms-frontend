@@ -5,22 +5,20 @@
       :items="data"
       sort-by="id"
       class="elevation-3 rounded-lg mt-10 mx-auto rule-card"
-      items-per-page="60"
+      items-per-page="30"
     >
       <template v-slot:top>
         <v-toolbar class="light-blue darken-3 rounded-t-lg rule-card" flat>
           <v-toolbar-title class="white--text">Content</v-toolbar-title>
           <v-spacer></v-spacer>
           <nuxt-link class="text-decoration-none" to="/create-content">
-            <v-btn color="orange darken-2" dark class="">
-              Create Content
-            </v-btn>
+            <v-btn color="#FEAD01" dark class=""> Create Content </v-btn>
           </nuxt-link>
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
         <v-icon
-          color="light-blue darken-3"
+          color="#014D4E"
           small
           class="mr-2"
           @click="editContent(item.contentId)"
@@ -65,7 +63,7 @@
     <!--/ Dialog Delete content -->
 
     <!-- Snackabr content -->
-    <v-snackbar v-model="snackbar" :multi-line="true" timeout="7500">
+    <v-snackbar v-model="snackbar" :multi-line="true" timeout="7000">
       {{ errorText }}
 
       <template v-slot:action="{ attrs }">
@@ -91,14 +89,16 @@ export default {
       { text: 'ID', value: 'contentId' },
       { text: 'Sort', value: 'sort' },
       { text: 'Code', value: 'contentCode' },
-      { text: 'Title', value: 'nameDisplay.displayText' },
-      { text: 'Description', value: 'descDisplay.displayText' },
+      // { text: 'Title', value: 'nameDisplay.displayText' },
+      // { text: 'Description', value: 'descDisplay.displayText' },
       { text: 'Actions', value: 'actions', sortable: false },
     ],
     data: [],
   }),
   created() {
-    this.initialize()
+    Backend.getContent().then((response) => {
+      this.data = response.data
+    })
   },
   mounted() {
     if (this.$route.query.msg === 'created') {
@@ -115,11 +115,6 @@ export default {
     }
   },
   methods: {
-    initialize() {
-      Backend.getContent().then((response) => {
-        this.data = response.data
-      })
-    },
     editContent(id) {
       this.$router.push('/edit-content/' + id)
     },
@@ -155,6 +150,6 @@ export default {
 </script>
 <style scoped>
 .rule-card {
-  max-width: 1500px;
+  max-width: 1000px;
 }
 </style>
