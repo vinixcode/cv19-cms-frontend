@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex xs12 class="d-flex">
-      <v-card class="my-10 mx-10" width="400px" max-width="400" elevation="4">
+      <v-card class="my-10 mx-10" elevation="4">
         <v-system-bar
           class="mb-10"
           height="50px"
@@ -9,66 +9,93 @@
           dark
         >
           <v-toolbar-title class="white--text px-5"
-            >Content</v-toolbar-title
+            >Create Content</v-toolbar-title
           ></v-system-bar
         >
         <v-form ref="form" class="text-center mx-5">
-          <v-text-field filled prepend-inner-icon="mdi-xml"></v-text-field>
-          <v-text-field
-            class="mb-8"
-            filled
-            hide-details
-            single-line
-            type="number"
-            placeholder="0"
-          />
-          <v-text-field
-            filled
-            prepend-inner-icon="mdi-format-text"
-          ></v-text-field>
-          <v-expansion-panels v-model="panel" :readonly="readonly" multiple>
+          <div>
+            <v-text-field
+              v-model="content.code"
+              filled
+              prepend-inner-icon="mdi-xml"
+              placeholder="Code"
+            ></v-text-field>
+            <v-text-field
+              v-model="content.sort"
+              class="mb-8"
+              filled
+              hide-details
+              single-line
+              prepend-inner-icon="mdi-xml"
+              type="number"
+              placeholder="Sort"
+            />
+            <v-text-field
+              v-model="content.title"
+              filled
+              prepend-inner-icon="mdi-format-text"
+              placeholder="Title"
+            ></v-text-field>
+
+            <vue-editor v-model="content.body"></vue-editor>
+          </div>
+
+          <v-card-actions class="my-5 pl-0">
+            <v-btn color="orange darken-2" dark @click="createContent"
+              >Create Content</v-btn
+            >
+          </v-card-actions>
+
+          <!-- <v-expansion-panels v-model="panel" :readonly="readonly" multiple>
             <v-expansion-panel class="mb-8">
               <v-expansion-panel-header
                 >Associated Rule</v-expansion-panel-header
               >
               <v-expansion-panel-content> Rule </v-expansion-panel-content>
             </v-expansion-panel>
-          </v-expansion-panels>
+          </v-expansion-panels> -->
         </v-form>
       </v-card>
-      <div>
-        <v-card class="mt-10 mb-5 pa-2" elevation="4">
-          <v-form ref="form" class="text-center px-2 py-2">
-            <vue-editor v-model="content"></vue-editor>
-          </v-form>
-        </v-card>
-        <nuxt-link class="text-decoration-none" to="/content">
-          <v-btn color="orange darken-2 float-right" dark class="">
-            Add Content
-          </v-btn>
-        </nuxt-link>
-      </div>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import Backend from '@/services/BackendService.js'
 let VueEditor
 
 if (process.client) {
   VueEditor = require('vue2-editor').VueEditor
 }
 export default {
-  head: {
-    titleTemplate: 'CREATE-CONTENT',
+  components: {
+    VueEditor,
   },
   data() {
     return {
-      content: 'Text comment',
+      content: {
+        code: '',
+        sort: '',
+        title: '',
+        body: '',
+        language: 'EN',
+      },
     }
   },
-  components: {
-    VueEditor,
+  methods: {
+    createContent() {
+      const data = this.content
+      Backend.createContent(data)
+        .then((response) => {
+          this.$router.push('/content/?msg=created')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+  },
+  head: {
+    title: 'Create Content',
   },
 }
 </script>

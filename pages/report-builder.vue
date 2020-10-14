@@ -305,7 +305,7 @@
 <script>
 export default {
   head: {
-    titleTemplate: 'REPORT BUILDER',
+    title: 'Report Builder',
   },
 }
 </script>

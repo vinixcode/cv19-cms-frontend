@@ -1,8 +1,12 @@
-<template >
+<template>
   <v-layout align-center="center" justify-center="center">
     <v-flex xs12>
-      <v-card class="py-10 pt-10 my-10 px-5 mx-auto" max-width="400" elevation="4">
-        <v-form ref="form" v-model="valid" class="text-center">
+      <v-card
+        class="py-10 pt-10 my-10 px-5 mx-auto"
+        max-width="400"
+        elevation="4"
+      >
+        <v-form ref="form" class="text-center">
           <v-avatar
             color="primary"
             size="95"
@@ -24,16 +28,14 @@
           ></v-text-field>
 
           <div class="d-flex justify-space-around">
-            <v-checkbox
-              v-model="checkbox1"
-              label="Remember me"
-              class="mt-0 pt-0"
-            ></v-checkbox>
+            <v-checkbox label="Remember me" class="mt-0 pt-0"></v-checkbox>
 
             <a href="#" class="pb-4 font-italic">Forgot password?</a>
           </div>
           <nuxt-link to="/rule">
-          <v-btn class="white--text" color="light-blue darken-3" block> LOGIN </v-btn>
+            <v-btn class="white--text" color="light-blue darken-3" block>
+              LOGIN
+            </v-btn>
           </nuxt-link>
         </v-form>
       </v-card>
@@ -43,16 +45,15 @@
           <img class="mx-3" width="200px" src="~/assets/bellage-logo.png" />
           <img class="mx-3" width="200px" src="~/assets/cv19-logo.png" />
         </div>
-        </div>
       </div>
     </v-flex>
   </v-layout>
 </template>
 <script>
-  export default {
-  layout: 'default-2',
+export default {
+  layout: 'login',
   head: {
-    titleTemplate: 'LOGIN',
+    title: 'Login',
   },
 }
 </script>
@@ -62,5 +63,4 @@
   top: -15%;
   left: 38%;
 }
-
 </style>

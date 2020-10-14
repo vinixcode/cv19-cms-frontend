@@ -15,15 +15,14 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon color="light-blue darken-3" small class="mr-2"> mdi-eye </v-icon>
+      <v-icon color="light-blue darken-3" small class="mr-2">
+        mdi-eye {{ item }}</v-icon
+      >
     </template>
   </v-data-table>
 </template>
 <script>
 export default {
-  head: {
-    titleTemplate: 'RULE',
-  },
   data: () => ({
     dialog: false,
     headers: [
@@ -102,6 +101,9 @@ export default {
         },
       ]
     },
+  },
+  head: {
+    title: 'Rule',
   },
 }
 </script>
