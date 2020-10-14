@@ -170,7 +170,7 @@ export default {
     },
     editContent(id) {
       const data = {
-        contentCode: this.content.contentCode,
+        code: this.content.contentCode,
         sort: this.content.sort,
         title: this.content.nameDisplay.displayText,
         body: this.content.descDisplay.displayText,
