@@ -12,24 +12,23 @@
             >Create Content</v-toolbar-title
           ></v-system-bar
         >
-        <v-form ref="form" class="text-center mx-5">
+        <v-form ref="form" v-model="valid" class="text-center mx-5">
           <div>
             <v-text-field
               v-model="content.code"
+              :rules="validationRules.code"
               filled
               prepend-inner-icon="mdi-xml"
               placeholder="Code"
             ></v-text-field>
             <v-text-field
               v-model="content.sort"
-              class="mb-8"
+              :rules="validationRules.sort"
               filled
-              hide-details
-              single-line
               prepend-inner-icon="mdi-xml"
-              type="number"
               placeholder="Sort"
-            />
+              type="number"
+            ></v-text-field>
             <v-text-field
               v-model="content.title"
               filled
@@ -41,7 +40,11 @@
           </div>
 
           <v-card-actions class="my-5 pl-0">
-            <v-btn color="orange darken-2" dark @click="createContent"
+            <v-btn
+              color="warning"
+              class="btn-create"
+              :disabled="!valid"
+              @click="createContent"
               >Create Content</v-btn
             >
           </v-card-actions>
@@ -56,6 +59,18 @@
           </v-expansion-panels> -->
         </v-form>
       </v-card>
+
+      <!-- Snackabr content -->
+      <v-snackbar v-model="snackbar" :multi-line="true" timeout="7000">
+        {{ errorText }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+      <!--/ Snackabr content -->
     </v-flex>
   </v-layout>
 </template>
@@ -73,12 +88,19 @@ export default {
   },
   data() {
     return {
+      valid: false,
+      snackbar: false,
+      errorText: '',
       content: {
-        code: '',
         sort: '',
         title: '',
         body: '',
+        code: '',
         language: 'EN',
+      },
+      validationRules: {
+        sort: [(v) => !!v || 'Sort is required'],
+        code: [(v) => !!v || 'Code required'],
       },
     }
   },
@@ -90,7 +112,10 @@ export default {
           this.$router.push('/content/?msg=created')
         })
         .catch((error) => {
-          console.log(error)
+          if (error) {
+            this.snackbar = true
+            this.errorText = 'Something went wrong. Please try again later.'
+          }
         })
     },
   },
@@ -100,4 +125,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.btn-create {
+  color: white;
+}
+</style>

@@ -12,26 +12,58 @@
           <v-toolbar-title class="white--text">Content</v-toolbar-title>
           <v-spacer></v-spacer>
           <nuxt-link class="text-decoration-none" to="/create-content">
-            <v-btn color="orange darken-2" dark class="">
-              Create Content
-            </v-btn>
+            <v-btn color="#FEAD01" dark class=""> Create Content </v-btn>
           </nuxt-link>
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
         <v-icon
-          color="light-blue darken-3"
+          color="#014D4E"
           small
           class="mr-2"
           @click="editContent(item.contentId)"
         >
           mdi-pencil
         </v-icon>
+        <v-icon
+          color="red darken-4"
+          small
+          class="mr-2"
+          @click="dialogContent(item.contentId)"
+        >
+          mdi-trash-can-outline
+        </v-icon>
+        <v-icon
+          color="light-blue darken-3"
+          small
+          class="mr-2"
+          @click="showContent(item.contentId)"
+        >
+          mdi-eye-outline
+        </v-icon>
       </template>
     </v-data-table>
 
+    <!--Dialog Delete content -->
+    <v-dialog v-model="deleteContentDialog" max-width="400">
+      <v-card>
+        <v-card-title class="headline">Are you sure?</v-card-title>
+        <v-card-text> This action cannot be reversed. </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn text @click="deleteContentDialog = false">Cancel</v-btn>
+          <v-btn color="red darken-4" text @click="deleteContent()"
+            >Delete</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!--/ Dialog Delete content -->
+
     <!-- Snackabr content -->
-    <v-snackbar v-model="snackbar" :multi-line="true" timeout="8500">
+    <v-snackbar v-model="snackbar" :multi-line="true" timeout="7000">
       {{ errorText }}
 
       <template v-slot:action="{ attrs }">
@@ -48,6 +80,8 @@
 import Backend from '@/services/BackendService.js'
 export default {
   data: () => ({
+    idDelele: '',
+    deleteContentDialog: false,
     dialog: false,
     snackbar: false,
     errorText: '',
@@ -55,29 +89,58 @@ export default {
       { text: 'ID', value: 'contentId' },
       { text: 'Sort', value: 'sort' },
       { text: 'Code', value: 'contentCode' },
-      { text: 'Title', value: 'nameDisplay.displayText' },
-      { text: 'Description', value: 'descDisplay.displayText' },
+      // { text: 'Title', value: 'nameDisplay.displayText' },
+      // { text: 'Description', value: 'descDisplay.displayText' },
       { text: 'Actions', value: 'actions', sortable: false },
     ],
     data: [],
   }),
   created() {
-    this.initialize()
+    Backend.getContent().then((response) => {
+      this.data = response.data
+    })
   },
   mounted() {
     if (this.$route.query.msg === 'created') {
       this.snackbar = true
       this.errorText = 'Content created successfully.'
+    } else if (this.$route.query.msg === 'updated') {
+      this.snackbar = true
+      this.errorText = 'Content updated successfully.'
+    } else if (this.$route.query.msg === 'deleted') {
+      this.snackbar = true
+      this.errorText = 'Content deleted successfully.'
+    } else {
+      this.snackbar = false
     }
   },
   methods: {
-    initialize() {
-      Backend.getContent().then((response) => {
-        this.data = response.data
-      })
-    },
     editContent(id) {
       this.$router.push('/edit-content/' + id)
+    },
+    showContent(id) {
+      this.$router.push('/show-content/' + id)
+    },
+    dialogContent(id) {
+      this.idDelele = id
+      this.deleteContentDialog = true
+    },
+    deleteContent() {
+      Backend.deleteContent(this.idDelele)
+        .then((response) => {
+          this.deleteContentDialog = false
+          this.snackbar = true
+          this.errorText = 'Content deleted successfully.'
+          Backend.getContent().then((response) => {
+            this.data = response.data
+          })
+        })
+        .catch((error) => {
+          if (error) {
+            this.snackbar = true
+            this.errorText = 'Something went wrong. Please try again later.'
+          }
+        })
     },
   },
   head: {

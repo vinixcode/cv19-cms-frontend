@@ -13,4 +13,10 @@ export default {
   createContent(data) {
     return api.post('/content', data)
   },
+  updateContent(id, data) {
+    return api.patch('/content/' + id, data)
+  },
+  deleteContent(id) {
+    return api.delete(`/content/${id}`)
+  },
 }
