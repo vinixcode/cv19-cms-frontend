@@ -23,14 +23,14 @@
         >Delete</v-btn
       >
 
-      <v-card max-width="1000" class="mt-10 pb-10">
-        <v-card-title class="text-h5">
-          <span class="header"
-            ><b>{{ content.contentCode }}</b></span
+      <v-card max-width="1000" class="mt-10 pb-5">
+        <v-toolbar class="card-content" dark flat>
+          <v-toolbar-title
+            ><b>Content </b> {{ content.contentCode }}</v-toolbar-title
           >
-        </v-card-title>
+        </v-toolbar>
 
-        <div class="ml-0 pl-7 ml-sm-2 pl-sm-10">
+        <div class="ml-0 pl-7 ml-sm-2 pl-sm-10 pt-5">
           <p class="mb-1">
             <b class="header">Content Id: </b>
             <span>{{ content.contentId }}</span>
@@ -146,6 +146,9 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  color: #1a237e;
+  color: #0277bd;
+}
+.card-content {
+  background-color: #0277bd !important;
 }
 </style>
