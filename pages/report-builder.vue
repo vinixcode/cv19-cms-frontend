@@ -26,7 +26,7 @@
           <div>
             <div
               draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
+              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4 card"
             >
               <p class="mt-4">Content</p>
             </div>
