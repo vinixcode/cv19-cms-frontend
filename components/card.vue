@@ -6,7 +6,7 @@
     @dragstart="dragStart"
     @dragover.stop
   >
-    <p class="mt-4">Content</p>
+    <slot />
   </div>
 </template>
 
@@ -17,9 +17,9 @@ export default {
     dragStart: (e) => {
       const target = e.target
       e.dataTransfer.setData('card_id', target.id)
-      setTimeout(() => {
-        target.style.display = 'none'
-      }, 0)
+      // setTimeout(() => {
+      // target.style.display = 'none'
+      // }, 0)
     },
   },
 }

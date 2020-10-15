@@ -22,6 +22,5 @@ export default {
 .board {
   width: 200px;
   height: 400px;
-  background-color: black;
 }
 </style>
