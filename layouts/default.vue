@@ -65,8 +65,8 @@ export default {
       items: [
         {
           icon: 'mdi-ruler',
-          title: 'Rule',
-          to: '/rule',
+          title: 'Sections',
+          to: '/section',
         },
         {
           icon: 'mdi-image-frame',
