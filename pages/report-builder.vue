@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="update rounded elevation-4">
+    <div class="update rounded elevation-2">
       <template>
         <a class="text-decoration-none" href="">
           <v-icon color="white" small class="mx-1"> mdi-eye </v-icon>
@@ -18,92 +18,24 @@
     </div>
     <v-row>
       <v-col md="3">
-        <v-card class="px-5 pb-10 toolbar-content" color="indigo darken-4">
-          <v-toolbar-title class="white--text pa-5 text-center"
-            >Content</v-toolbar-title
-          >
-          <!-- Content -->
-          <div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4 card"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-            <div
-              draggable
-              class="mb-5 content-draggable d-flex justify-center align-center rounded elevation-4"
-            >
-              <p class="mt-4">Content</p>
-            </div>
-          </div>
-        </v-card>
+        <board class="board-1 elevation-2">
+          <card id="card-1" draggable="true">
+            <p class="mt-3">CONTENT</p>
+          </card>
+          <card id="card-2" draggable="true">
+            <p class="mt-3">CONTENT</p>
+          </card>
+          <card id="card-3" draggable="true">
+            <p class="mt-3">CONTENT</p>
+          </card>
+        </board>
       </v-col>
       <v-col md="9">
-        <v-card
-          elevation="4"
-          class="px-5 pb-10 mx-3 float-right"
-          height="auto"
-          width="100%"
-        >
+        <v-card elevation="4" class="pa-5" height="auto" width="100%">
           <div
             class="d-flex justify-space-around font-weight-bold mt-10 blue--text"
           >
-            <p>13/10/2020</p>
+            <p>16/10/2020</p>
             <p class="mt-10 text-h3 font-weight-black">
               My CV19 CheckUp Report
             </p>
@@ -123,16 +55,19 @@
               cannot be used to diagnose or treat any medical condition.
             </p>
           </div>
-          <!-- Report -->
-          <div>
-            <div class="">
-              <v-card class="pa-3 mt-3">
-                <div class="new-item d-flex justify-center align-center">
-                  <v-icon size="60" color="gray">mdi-plus</v-icon>
-                </div>
-              </v-card>
-            </div>
-          </div>
+          <board class="board-2 py-5 pb-10">
+            <!-- <div class="new-item">
+              <v-icon
+                id="card-0"
+                draggable="false"
+                color="grey lighten-1"
+                class="ma-10"
+                size="60"
+              >
+                mdi-plus</v-icon
+              >
+            </div> -->
+          </board>
         </v-card>
       </v-col>
     </v-row>
@@ -140,40 +75,39 @@
 </template>
 
 <script>
-export default {}
+import board from '../components/board'
+import card from '../components/card'
+export default {
+  name: 'App',
+  components: {
+    board,
+    card,
+  },
+}
 </script>
 
 <style>
-.content-draggable {
-  background-color: #fff;
-  cursor: move;
-  height: 120px;
-  transition-duration: 0.5s;
-  transition-property: all;
-  font-size: 18px;
-}
-
-.content-draggable:hover {
-  background-color: rgb(255, 246, 227);
-  transform: scale(1.05, 1.05);
-  color: #1a237e;
-  font-size: 20px;
-}
-
-.toolbar-content {
+.board-1 {
+  overflow: auto !important;
+  height: 83vh;
+  width: 19vw;
+  background-color: #1a237e;
+  border-radius: 5px;
   position: fixed;
 }
 
-.new-item {
+.board-2 {
   border-style: dotted !important;
   border-width: 3px !important;
   border-color: gray;
-  height: 300px;
+  border-radius: 5px;
+  height: auto;
   cursor: move;
+  width: 100%;
 }
 
-.new-item:hover {
-  background-color: rgb(255, 246, 227);
+.board-2:hover {
+  background-color: rgb(227, 247, 255);
 }
 
 .update {
@@ -185,9 +119,8 @@ export default {}
   z-index: 1;
 }
 
-.toolbar-content {
-  overflow: auto !important;
-  height: 83vh;
-  width: 19vw;
+.new-item {
+  background-color: blue;
+  width: 100% !important;
 }
 </style>

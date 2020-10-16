@@ -12,15 +12,10 @@ export default {
       const cardID = e.dataTransfer.getData('card_id')
       const card = document.getElementById(cardID)
       card.style.display = 'block'
-      e.target.appendChild(card)
+      e.target.prepend(card)
     },
   },
 }
 </script>
 
-<style>
-.board {
-  width: 200px;
-  height: 400px;
-}
-</style>
+<style></style>
