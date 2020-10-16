@@ -118,19 +118,10 @@ export default {
         this.section.content.title = data.content.title
       }
 
-      // if (data.descDisplay === null) {
-      //   this.content.descDisplay.displayText = ''
-      // } else {
-      //   this.content.descDisplay.displayText = this.removeTags(
-      //     data.descDisplay.displayText
-      //   )
-      // }
-
       this.section.id = data.id
       this.section.section.code = data.section.code
       this.section.content.code = data.content.code
       this.section.sort = data.sort
-      this.section.content.title = data.content.title
       this.section.content.body.display_languages =
         data.content.body.display_languages
     })

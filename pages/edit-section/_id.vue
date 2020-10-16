@@ -54,16 +54,37 @@
               label="Section Title"
               filled
             ></v-text-field>
-            <div
-              v-for="display in section.content.body.display_languages"
-              :key="display.id"
-            >
-              <v-textarea
-                v-model="display.text"
-                label="Section Body"
-                filled
-              ></v-textarea>
-            </div>
+
+            <v-card class="my-2" elevation="4">
+              <v-system-bar
+                class="mb-5"
+                height="50px"
+                color="light-blue darken-3"
+                dark
+              >
+                <v-toolbar-title class="white--text px-5">
+                  Display Languages
+                </v-toolbar-title></v-system-bar
+              >
+              <div
+                v-for="display in section.content.body.display_languages"
+                :key="display.id"
+                class="px-5"
+              >
+                <v-textarea
+                  v-model="display.text"
+                  label="Section Body"
+                  filled
+                ></v-textarea>
+
+                <v-text-field
+                  v-model="display.lang"
+                  prepend-inner-icon="mdi-format-text"
+                  label="Section Language"
+                  filled
+                ></v-text-field>
+              </div>
+            </v-card>
           </div>
 
           <v-card-actions class="mb-5 pl-0">
@@ -157,7 +178,7 @@ export default {
         dataText[i] = {
           display_id: data.content.body.display_languages[i].display_id,
           lang: data.content.body.display_languages[i].lang,
-          text: this.removeTags(data.content.body.display_languages[i].text),
+          text: data.content.body.display_languages[i].text,
         }
         console.log(dataText[i])
       }
@@ -203,7 +224,7 @@ export default {
     },
   },
   head: {
-    title: 'Edit Content',
+    title: 'Edit Section',
   },
 }
 </script>

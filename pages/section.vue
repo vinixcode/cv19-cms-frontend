@@ -5,6 +5,7 @@
       :items="data"
       sort-by="id"
       class="elevation-3 rounded-lg mt-10 mx-auto rule-card"
+      :items-per-page="30"
     >
       <template v-slot:top>
         <v-toolbar class="light-blue darken-3 rounded-t-lg rule-card" flat>
@@ -142,7 +143,7 @@ export default {
     },
   },
   head: {
-    title: 'Content',
+    title: 'Section',
   },
 }
 </script>
