@@ -152,10 +152,13 @@ export default {
       this.section.content.title = data.content.title
 
       const dataText = []
+
       for (let i = 0; i < data.content.body.display_languages.length; i++) {
-        dataText[i] = this.removeTags(
-          data.content.body.display_languages[i].text
-        )
+        dataText[i] = {
+          display_id: data.content.body.display_languages[i].display_id,
+          lang: data.content.body.display_languages[i].lang,
+          text: this.removeTags(data.content.body.display_languages[i].text),
+        }
         console.log(dataText[i])
       }
       this.section.content.body.display_languages = dataText
