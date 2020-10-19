@@ -23,7 +23,4 @@ export default {
   deleteContent(id) {
     return api.delete(`/content/${id}`)
   },
-  getSections() {
-    return apiTwo.get('/crud/sectionContent')
-  },
 }
