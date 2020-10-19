@@ -44,12 +44,12 @@
             <span>{{ content.contentCode }}</span>
           </p>
           <p class="mb-1">
-            <b class="header">Content Body: </b>
-            <span>{{ content.descDisplay.displayText }}</span>
-          </p>
-          <p class="mb-1">
             <b class="header">Content Tilte: </b>
             <span>{{ content.nameDisplay.displayText }}</span>
+          </p>
+          <p class="mb-1">
+            <b class="header">Content Body: </b>
+            <span>{{ content.descDisplay.displayText }}</span>
           </p>
         </div>
       </v-card>
@@ -108,9 +108,7 @@ export default {
       if (data.descDisplay === null) {
         this.content.descDisplay.displayText = ''
       } else {
-        this.content.descDisplay.displayText = this.removeTags(
-          data.descDisplay.displayText
-        )
+        this.content.descDisplay.displayText = data.descDisplay.displayText
       }
 
       this.content.contentId = data.contentId

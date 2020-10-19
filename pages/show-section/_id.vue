@@ -58,7 +58,7 @@
               v-for="display in section.content.body.display_languages"
               :key="display.id"
             >
-              <span v-html="display.text"></span>
+              <span>{{ display.text }}</span>
             </div>
           </div>
         </div>
