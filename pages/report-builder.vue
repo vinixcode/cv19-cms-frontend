@@ -55,19 +55,23 @@
               cannot be used to diagnose or treat any medical condition.
             </p>
           </div>
-          <board class="board-2 py-5 pb-10">
-            <!-- <div class="new-item">
-              <v-icon
-                id="card-0"
-                draggable="false"
-                color="grey lighten-1"
-                class="ma-10"
-                size="60"
-              >
-                mdi-plus</v-icon
-              >
-            </div> -->
-          </board>
+          <div v-for="item in content" :key="item.id">
+            <board class="board-2 pb-10 my-3"> </board>
+          </div>
+          <div class="text-center">
+            <v-btn class="mx-2 my-3" fab elevation="2" color="primary">
+              <v-icon dark @click="addBoard"> mdi-plus </v-icon>
+            </v-btn>
+            <v-btn
+              class="mx-2 my-3"
+              fab
+              elevation="2"
+              dark
+              color="red accent-4"
+            >
+              <v-icon dark @click="removeBoard"> mdi-minus </v-icon>
+            </v-btn>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -78,10 +82,23 @@
 import board from '../components/board'
 import card from '../components/card'
 export default {
-  name: 'App',
   components: {
     board,
     card,
+  },
+  data() {
+    return {
+      content: 1,
+      name: 'App',
+    }
+  },
+  methods: {
+    addBoard() {
+      this.content += 1
+    },
+    removeBoard() {
+      this.content -= 1
+    },
   },
 }
 </script>
@@ -120,7 +137,6 @@ export default {
 }
 
 .new-item {
-  background-color: blue;
   width: 100% !important;
 }
 </style>
