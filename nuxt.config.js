@@ -6,6 +6,9 @@ export default {
     backendUrl:
       process.env.BACKEND_URL ||
       'http://cv19symfonycms-env.eba-p6xxmdyb.us-east-1.elasticbeanstalk.com',
+    UrlNodeService:
+      process.env.BACKEND_URL_NODE ||
+      'http://cv19checkupbackend-env.eba-pymgjyfx.us-east-1.elasticbeanstalk.com/',
   },
 
   // Target (https://go.nuxtjs.dev/config-target)
