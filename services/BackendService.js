@@ -3,10 +3,6 @@ const api = axios.create({
   baseURL: process.env.backendUrl,
 })
 
-const apiTwo = axios.create({
-  baseURL: process.env.backendUrlTwo,
-})
-
 export default {
   getContent() {
     return api.get('/content')
