@@ -177,7 +177,7 @@ export default {
       }
       Backend.updateContent(id, data)
         .then((response) => {
-          this.$router.push('/content/?msg=updated')
+          this.$router.push('/content/content/?msg=updated')
         })
         .catch((error) => {
           if (error) {
@@ -189,7 +189,7 @@ export default {
     deleteContent(id) {
       Backend.deleteContent(id)
         .then((response) => {
-          this.$router.push('/content/?msg=deleted')
+          this.$router.push('/content/content/?msg=deleted')
         })
         .catch((error) => {
           if (error) {

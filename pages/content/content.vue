@@ -11,7 +11,7 @@
         <v-toolbar class="light-blue darken-3 rounded-t-lg rule-card" flat>
           <v-toolbar-title class="white--text">Content</v-toolbar-title>
           <v-spacer></v-spacer>
-          <nuxt-link class="text-decoration-none" to="/create-content">
+          <nuxt-link class="text-decoration-none" to="/content/create-content">
             <v-btn color="#FEAD01" dark class=""> Create Content </v-btn>
           </nuxt-link>
         </v-toolbar>
@@ -89,8 +89,7 @@ export default {
       { text: 'ID', value: 'contentId' },
       { text: 'Sort', value: 'sort' },
       { text: 'Code', value: 'contentCode' },
-      // { text: 'Title', value: 'nameDisplay.displayText' },
-      // { text: 'Description', value: 'descDisplay.displayText' },
+      { text: 'Language', value: 'descDisplay.languageId' },
       { text: 'Actions', value: 'actions', sortable: false },
     ],
     data: [],
@@ -98,6 +97,7 @@ export default {
   created() {
     Backend.getContent().then((response) => {
       this.data = response.data
+      console.log(this.data)
     })
   },
   mounted() {
@@ -119,7 +119,7 @@ export default {
       this.$router.push('/edit-content/' + id)
     },
     showContent(id) {
-      this.$router.push('/show-content/' + id)
+      this.$router.push('/content/show-content/' + id)
     },
     dialogContent(id) {
       this.idDelele = id

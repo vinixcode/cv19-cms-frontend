@@ -1,10 +1,17 @@
 <template>
   <div>
+    <v-btn
+      color="grey lighten-1"
+      class="px-8 mr-1 mr-sm-2 mt-2"
+      dark
+      to="/section/section"
+      >Back</v-btn
+    >
     <v-data-table
       :headers="headers"
       :items="data"
       sort-by="id"
-      class="elevation-3 rounded-lg mt-10 mx-auto rule-card"
+      class="elevation-3 rounded-lg mt-5 mx-auto rule-card"
       :items-per-page="30"
     >
       <template v-slot:top>
@@ -39,7 +46,7 @@
           color="light-blue darken-3"
           small
           class="mr-2"
-          @click="showSection(item.section_id)"
+          @click="showContent(item.content_id)"
         >
           mdi-eye-outline
         </v-icon>
@@ -73,7 +80,11 @@ export default {
       this.section = response.data[0].section_code
     })
   },
-  methods: {},
+  methods: {
+    showContent(id) {
+      this.$router.push('/content/show-content/' + id)
+    },
+  },
   head: {
     title: 'Content by Section',
   },

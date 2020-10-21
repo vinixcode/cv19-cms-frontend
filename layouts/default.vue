@@ -68,11 +68,11 @@ export default {
           title: 'Sections',
           to: '/section/section',
         },
-        // {
-        //   icon: 'mdi-image-frame',
-        //   title: 'Content',
-        //   to: '/content',
-        // },
+        {
+          icon: 'mdi-image-frame',
+          title: 'Contents',
+          to: '/content/content',
+        },
         // {
         //   icon: 'mdi-clipboard-edit',
         //   title: 'Report Builder',
