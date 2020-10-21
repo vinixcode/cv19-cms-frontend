@@ -19,4 +19,10 @@ export default {
   deleteContent(id) {
     return api.delete(`/content/${id}`)
   },
+  getSections() {
+    return api.get('/section')
+  },
+  getAContentSection(id) {
+    return api.get(`/section/${id}`)
+  },
 }

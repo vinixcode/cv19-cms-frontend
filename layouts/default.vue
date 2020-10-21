@@ -66,18 +66,18 @@ export default {
         {
           icon: 'mdi-ruler',
           title: 'Sections',
-          to: '/section',
+          to: '/section/section',
         },
-        {
-          icon: 'mdi-image-frame',
-          title: 'Content',
-          to: '/content',
-        },
-        {
-          icon: 'mdi-clipboard-edit',
-          title: 'Report Builder',
-          to: '/report-builder',
-        },
+        // {
+        //   icon: 'mdi-image-frame',
+        //   title: 'Content',
+        //   to: '/content',
+        // },
+        // {
+        //   icon: 'mdi-clipboard-edit',
+        //   title: 'Report Builder',
+        //   to: '/report-builder',
+        // },
       ],
       miniVariant: false,
       right: true,
