@@ -32,7 +32,7 @@
 
             <a href="#" class="pb-4 font-italic">Forgot password?</a>
           </div>
-          <nuxt-link to="/rule">
+          <nuxt-link to="/section/section">
             <v-btn class="white--text" color="light-blue darken-3" block>
               LOGIN
             </v-btn>
