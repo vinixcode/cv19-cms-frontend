@@ -73,11 +73,11 @@ export default {
           title: 'Contents',
           to: '/content/content',
         },
-        // {
-        //   icon: 'mdi-clipboard-edit',
-        //   title: 'Report Builder',
-        //   to: '/report-builder',
-        // },
+        {
+          icon: 'mdi-clipboard-edit',
+          title: 'Report Builder',
+          to: '/report-builder',
+        },
       ],
       miniVariant: false,
       right: true,
