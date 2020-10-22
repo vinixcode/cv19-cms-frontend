@@ -9,70 +9,78 @@
           dark
         >
           <v-toolbar-title class="white--text px-5"
-            >Edit Content</v-toolbar-title
+            >Edit Section</v-toolbar-title
           ></v-system-bar
         >
         <v-form ref="form" class="text-center mx-5">
           <div>
             <v-text-field
-              v-model="content.contentId"
-              label="Content Id"
+              v-model="section.section_id"
+              label="Section Id"
               filled
+              type="number"
               prepend-inner-icon="mdi-xml"
-              placeholder="Code"
+              placeholder="Id"
               disabled
             ></v-text-field>
 
             <v-text-field
-              v-model="content.contentCode"
-              label="Code"
+              v-model="section.page_id"
+              label="Page Id"
               filled
+              type="number"
               prepend-inner-icon="mdi-xml"
-              placeholder="Code"
+              placeholder="Section Code"
+              disabled
             ></v-text-field>
 
             <v-text-field
-              v-model="content.sort"
-              label="Sort"
+              v-model="section.section_code"
+              label="Section Code"
               filled
               prepend-inner-icon="mdi-xml"
-              type="number"
-              placeholder="Sort"
-            />
+              placeholder="Section Code"
+            ></v-text-field>
 
             <v-text-field
-              v-model="content.nameDisplay.displayText"
-              label="Title"
+              v-model="section.sort"
+              label="Sort"
               filled
-              prepend-inner-icon="mdi-format-text"
-              placeholder="Title"
+              type="number"
+              prepend-inner-icon="mdi-xml"
+              placeholder="Section Code"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="section.display_id"
+              label="Display Id"
+              filled
+              type="number"
+              prepend-inner-icon="mdi-xml"
+              placeholder="Sort"
+              disabled
             ></v-text-field>
 
             <v-textarea
-              v-model="content.descDisplay.displayText"
-              label="Body"
+              v-model="section.description"
+              label="Description"
               filled
+              prepend-inner-icon="mdi-xml"
+              placeholder="Sort"
             ></v-textarea>
           </div>
 
           <v-card-actions class="mb-5 pl-0">
-            <v-btn color="#FEAD01" dark @click="editContent(content.contentId)"
+            <v-btn color="#FEAD01" dark @click="editSection(section.section_id)"
               >Save</v-btn
             >
-            <v-btn color="red darken-4" dark @click="deleteContentDialog = true"
+            <!-- <v-btn color="red darken-4" dark @click="deleteContentDialog = true"
               >Delete</v-btn
+            > -->
+            <v-btn color="grey lighten-1" dark to="/section/section"
+              >Back</v-btn
             >
-            <v-btn color="grey lighten-1" dark to="/content">Back</v-btn>
           </v-card-actions>
-
-          <!-- <v-expansion-panels v-model="panel" :readonly="readonly" multiple>
-            <v-expansion-panel class="mb-8">
-              <v-expansion-panel-header
-                >Associated Rule</v-expansion-panel-header
-              >
-              <v-expansion-panel-content> Rule </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels> -->
         </v-form>
       </v-card>
     </v-flex>
@@ -111,54 +119,18 @@
 
 <script>
 import Backend from '@/services/BackendService.js'
-// let VueEditor
-
-// if (process.client) {
-//   VueEditor = require('vue2-editor').VueEditor
-// }
 export default {
-  // components: {
-  //   VueEditor,
-  // },
   data() {
     return {
       deleteContentDialog: false,
       snackbar: false,
       errorText: '',
-      content: {
-        contentCode: '',
-        contentId: '',
-        sort: '',
-        nameDisplay: {
-          displayText: '',
-        },
-        descDisplay: {
-          displayText: '',
-        },
-      },
+      section: {},
     }
   },
   created() {
-    Backend.getAContent(this.$route.params.id).then((response) => {
-      const data = response.data
-
-      if (data.nameDisplay === null) {
-        this.content.nameDisplay.displayText = ''
-      } else {
-        this.content.nameDisplay.displayText = data.nameDisplay.displayText
-      }
-
-      if (data.descDisplay === null) {
-        this.content.descDisplay.displayText = ''
-      } else {
-        this.content.descDisplay.displayText = this.removeTags(
-          data.descDisplay.displayText
-        )
-      }
-
-      this.content.contentId = data.contentId
-      this.content.sort = data.sort
-      this.content.contentCode = data.contentCode
+    Backend.getASection(this.$route.params.id).then((response) => {
+      this.section = response.data
     })
   },
   methods: {
@@ -168,16 +140,19 @@ export default {
 
       return str.replace(/(<([^>]+)>)/gi, '')
     },
-    editContent(id) {
+    editSection(id) {
       const data = {
-        code: this.content.contentCode,
-        sort: this.content.sort,
-        title: this.content.nameDisplay.displayText,
-        body: this.content.descDisplay.displayText,
+        section_id: this.section.section_id,
+        section_code: this.section.section_code,
+        page_id: this.section.page_id,
+        sort: this.section.sort,
+        display_id: this.section.page_id,
+        description: this.section.description,
       }
-      Backend.updateContent(id, data)
+
+      Backend.updateSection(id, data)
         .then((response) => {
-          this.$router.push('/content/?msg=updated')
+          this.$router.push('/section/section/?msg=updated')
         })
         .catch((error) => {
           if (error) {
@@ -200,7 +175,7 @@ export default {
     },
   },
   head: {
-    title: 'Edit Content',
+    title: 'Edit Section',
   },
 }
 </script>

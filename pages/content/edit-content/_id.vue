@@ -9,93 +9,70 @@
           dark
         >
           <v-toolbar-title class="white--text px-5"
-            >Edit Section</v-toolbar-title
+            >Edit Content</v-toolbar-title
           ></v-system-bar
         >
         <v-form ref="form" class="text-center mx-5">
           <div>
             <v-text-field
-              v-model="section.id"
-              label="Section Id"
+              v-model="content.contentId"
+              label="Content Id"
               filled
               prepend-inner-icon="mdi-xml"
-              placeholder="Id"
+              placeholder="Code"
               disabled
             ></v-text-field>
 
             <v-text-field
-              v-model="section.section.code"
-              label="Section Code"
+              v-model="content.contentCode"
+              label="Code"
               filled
               prepend-inner-icon="mdi-xml"
-              placeholder="Section Code"
+              placeholder="Code"
             ></v-text-field>
 
             <v-text-field
-              v-model="section.content.code"
-              label="Content Code"
+              v-model="content.sort"
+              label="Sort"
               filled
               prepend-inner-icon="mdi-xml"
-              placeholder="Content Code"
+              type="number"
+              placeholder="Sort"
             />
 
             <v-text-field
-              v-model="section.sort"
-              label="Sort"
+              v-model="content.nameDisplay.displayText"
+              label="Title"
               filled
-              type="number"
-              prepend-inner-icon="mdi-xml"
-              placeholder="Sort"
-            ></v-text-field>
-
-            <v-text-field
-              v-model="section.content.title"
               prepend-inner-icon="mdi-format-text"
-              label="Section Title"
-              filled
+              placeholder="Title"
             ></v-text-field>
 
-            <v-card class="my-2" elevation="4">
-              <v-system-bar
-                class="mb-5"
-                height="50px"
-                color="light-blue darken-3"
-                dark
-              >
-                <v-toolbar-title class="white--text px-5">
-                  Display Languages
-                </v-toolbar-title></v-system-bar
-              >
-              <div
-                v-for="display in section.content.body.display_languages"
-                :key="display.id"
-                class="px-5"
-              >
-                <v-textarea
-                  v-model="display.text"
-                  label="Section Body"
-                  filled
-                ></v-textarea>
-
-                <v-text-field
-                  v-model="display.lang"
-                  prepend-inner-icon="mdi-format-text"
-                  label="Section Language"
-                  filled
-                ></v-text-field>
-              </div>
-            </v-card>
+            <v-textarea
+              v-model="content.descDisplay.displayText"
+              label="Body"
+              filled
+            ></v-textarea>
           </div>
 
           <v-card-actions class="mb-5 pl-0">
-            <!-- <v-btn color="#FEAD01" dark @click="editContent(content.contentId)"
+            <v-btn color="#FEAD01" dark @click="editContent(content.contentId)"
               >Save</v-btn
             >
             <v-btn color="red darken-4" dark @click="deleteContentDialog = true"
               >Delete</v-btn
-            > -->
-            <v-btn color="grey lighten-1" dark to="/section">Back</v-btn>
+            >
+            <v-btn color="grey lighten-1" dark to="/content">Back</v-btn>
           </v-card-actions>
+
+          <!-- <v-expansion-panels v-model="panel" :readonly="readonly" multiple>
+            <v-expansion-panel class="mb-8">
+              <v-expansion-panel-header
+                >Associated Rule</v-expansion-panel-header
+              >
+              <v-expansion-panel-content> Rule </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels> -->
         </v-form>
       </v-card>
     </v-flex>
@@ -133,56 +110,55 @@
 </template>
 
 <script>
-import Backend from '@/services/NodeService.js'
+import Backend from '@/services/BackendService.js'
+// let VueEditor
+
+// if (process.client) {
+//   VueEditor = require('vue2-editor').VueEditor
+// }
 export default {
+  // components: {
+  //   VueEditor,
+  // },
   data() {
     return {
       deleteContentDialog: false,
       snackbar: false,
       errorText: '',
-      section: {
-        id: '',
+      content: {
+        contentCode: '',
+        contentId: '',
         sort: '',
-        section: {
-          code: '',
+        nameDisplay: {
+          displayText: '',
         },
-        content: {
-          code: '',
-          title: '',
-          body: {
-            display_languages: [],
-          },
+        descDisplay: {
+          displayText: '',
         },
       },
     }
   },
   created() {
-    Backend.getASection(this.$route.params.id).then((response) => {
+    Backend.getAContent(this.$route.params.id).then((response) => {
       const data = response.data
 
-      if (data.content.title === null) {
-        this.section.content.title = ''
+      if (data.nameDisplay === null) {
+        this.content.nameDisplay.displayText = ''
       } else {
-        this.section.content.title = data.content.title
+        this.content.nameDisplay.displayText = data.nameDisplay.displayText
       }
 
-      this.section.id = data.id
-      this.section.section.code = data.section.code
-      this.section.content.code = data.content.code
-      this.section.sort = data.sort
-      this.section.content.title = data.content.title
-
-      const dataText = []
-
-      for (let i = 0; i < data.content.body.display_languages.length; i++) {
-        dataText[i] = {
-          display_id: data.content.body.display_languages[i].display_id,
-          lang: data.content.body.display_languages[i].lang,
-          text: data.content.body.display_languages[i].text,
-        }
-        console.log(dataText[i])
+      if (data.descDisplay === null) {
+        this.content.descDisplay.displayText = ''
+      } else {
+        this.content.descDisplay.displayText = this.removeTags(
+          data.descDisplay.displayText
+        )
       }
-      this.section.content.body.display_languages = dataText
+
+      this.content.contentId = data.contentId
+      this.content.sort = data.sort
+      this.content.contentCode = data.contentCode
     })
   },
   methods: {
@@ -201,7 +177,7 @@ export default {
       }
       Backend.updateContent(id, data)
         .then((response) => {
-          this.$router.push('/content/?msg=updated')
+          this.$router.push('/content/content/?msg=updated')
         })
         .catch((error) => {
           if (error) {
@@ -213,7 +189,7 @@ export default {
     deleteContent(id) {
       Backend.deleteContent(id)
         .then((response) => {
-          this.$router.push('/content/?msg=deleted')
+          this.$router.push('/content/content/?msg=deleted')
         })
         .catch((error) => {
           if (error) {
@@ -224,7 +200,7 @@ export default {
     },
   },
   head: {
-    title: 'Edit Section',
+    title: 'Edit Content',
   },
 }
 </script>

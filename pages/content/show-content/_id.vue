@@ -5,7 +5,7 @@
         color="grey lighten-1"
         class="px-8 mr-1 mr-sm-2 mb-2"
         dark
-        to="/content"
+        to="/content/content"
         >Back</v-btn
       >
       <v-btn
@@ -23,7 +23,7 @@
         >Delete</v-btn
       >
 
-      <v-card max-width="1000" class="mt-10 pb-5">
+      <v-card max-width="1000" class="mt-5 pb-5">
         <v-toolbar class="card-content" dark flat>
           <v-toolbar-title
             ><b>Content </b> {{ content.contentCode }}</v-toolbar-title
@@ -50,6 +50,10 @@
           <p class="mb-1">
             <b class="header">Content Body: </b>
             <span>{{ content.descDisplay.displayText }}</span>
+          </p>
+          <p class="mb-1">
+            <b class="header">Language Id: </b>
+            <span>{{ content.descDisplay.languageId }}</span>
           </p>
         </div>
       </v-card>
@@ -91,6 +95,7 @@ export default {
         },
         descDisplay: {
           displayText: '',
+          languageId: '',
         },
       },
     }
@@ -98,6 +103,7 @@ export default {
   created() {
     Backend.getAContent(this.$route.params.id).then((response) => {
       const data = response.data
+      console.log(data)
 
       if (data.nameDisplay === null) {
         this.content.nameDisplay.displayText = ''
@@ -114,6 +120,7 @@ export default {
       this.content.contentId = data.contentId
       this.content.sort = data.sort
       this.content.contentCode = data.contentCode
+      this.content.descDisplay.languageId = data.descDisplay.languageId
     })
   },
   methods: {
@@ -124,7 +131,7 @@ export default {
       return str.replace(/(<([^>]+)>)/gi, '')
     },
     editContent(id) {
-      this.$router.push('/edit-content/' + id)
+      this.$router.push('/content/edit-content/' + id)
     },
     deleteContent(id) {
       Backend.deleteContent(id)

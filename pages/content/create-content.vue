@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex xs12 class="d-flex">
-      <v-card class="my-10 mx-10" elevation="4">
+      <v-card class="mt-5 mb-10 mx-10" elevation="4">
         <v-system-bar
           class="mb-10"
           height="50px"
