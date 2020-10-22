@@ -98,7 +98,6 @@ export default {
   created() {
     Backend.getSections().then((response) => {
       this.data = response.data
-      console.log(this.data)
     })
   },
   mounted() {

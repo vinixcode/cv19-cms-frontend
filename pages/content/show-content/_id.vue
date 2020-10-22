@@ -103,7 +103,6 @@ export default {
   created() {
     Backend.getAContent(this.$route.params.id).then((response) => {
       const data = response.data
-      console.log(data)
 
       if (data.nameDisplay === null) {
         this.content.nameDisplay.displayText = ''

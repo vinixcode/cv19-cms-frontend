@@ -9,7 +9,7 @@
       <v-toolbar class="light-blue darken-3 rounded-t-lg rule-card" flat>
         <v-toolbar-title class="white--text">Rules</v-toolbar-title>
         <v-spacer></v-spacer>
-        <nuxt-link class="text-decoration-none" to="/create-rule">
+        <nuxt-link class="text-decoration-none" to="/rule/create-rule">
           <v-btn color="orange darken-2" dark class=""> Create Rule </v-btn>
         </nuxt-link>
       </v-toolbar>

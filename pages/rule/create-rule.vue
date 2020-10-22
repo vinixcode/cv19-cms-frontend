@@ -25,7 +25,7 @@
             prepend-inner-icon="mdi-format-text"
           ></v-text-field>
 
-          <nuxt-link class="text-decoration-none" to="/rule">
+          <nuxt-link class="text-decoration-none" to="/rule/rule">
             <v-btn class="white--text mb-8" color="orange darken-2">
               Add Rule
             </v-btn>
