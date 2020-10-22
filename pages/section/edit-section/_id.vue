@@ -134,12 +134,6 @@ export default {
     })
   },
   methods: {
-    removeTags(str) {
-      if (str === null || str === '') return false
-      else str = str.toString()
-
-      return str.replace(/(<([^>]+)>)/gi, '')
-    },
     editSection(id) {
       const data = {
         section_id: this.section.section_id,

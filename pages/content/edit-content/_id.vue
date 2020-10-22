@@ -151,9 +151,7 @@ export default {
       if (data.descDisplay === null) {
         this.content.descDisplay.displayText = ''
       } else {
-        this.content.descDisplay.displayText = this.removeTags(
-          data.descDisplay.displayText
-        )
+        this.content.descDisplay.displayText = data.descDisplay.displayText
       }
 
       this.content.contentId = data.contentId
@@ -162,12 +160,6 @@ export default {
     })
   },
   methods: {
-    removeTags(str) {
-      if (str === null || str === '') return false
-      else str = str.toString()
-
-      return str.replace(/(<([^>]+)>)/gi, '')
-    },
     editContent(id) {
       const data = {
         code: this.content.contentCode,

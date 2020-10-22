@@ -124,12 +124,6 @@ export default {
     })
   },
   methods: {
-    removeTags(str) {
-      if (str === null || str === '') return false
-      else str = str.toString()
-
-      return str.replace(/(<([^>]+)>)/gi, '')
-    },
     editContent(id) {
       this.$router.push('/content/edit-content/' + id)
     },
