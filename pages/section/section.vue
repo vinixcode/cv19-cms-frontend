@@ -25,14 +25,14 @@
         >
           mdi-pencil
         </v-icon>
-        <!-- <v-icon
+        <v-icon
           color="red darken-4"
           small
           class="mr-2"
-          @click="dialogContent(item.contentId)"
+          @click="dialogSection(item.section_id)"
         >
           mdi-trash-can-outline
-        </v-icon> -->
+        </v-icon>
         <v-icon
           color="light-blue darken-3"
           small
@@ -44,8 +44,26 @@
       </template>
     </v-data-table>
 
+    <!--Dialog Delete section -->
+    <v-dialog v-model="deleteSectionDialog" max-width="400">
+      <v-card>
+        <v-card-title class="headline">Are you sure?</v-card-title>
+        <v-card-text> This action cannot be reversed. </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn text @click="deleteSectionDialog = false">Cancel</v-btn>
+          <v-btn color="red darken-4" text @click="deleteSection()"
+            >Delete</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!--/ Dialog Delete section -->
+
     <!-- Snackabr section -->
-    <v-snackbar v-model="snackbar" :multi-line="true" timeout="8500">
+    <v-snackbar v-model="snackbar" :multi-line="true" timeout="6000">
       {{ errorText }}
 
       <template v-slot:action="{ attrs }">
@@ -62,6 +80,8 @@
 import Backend from '@/services/BackendService.js'
 export default {
   data: () => ({
+    idDelele: '',
+    deleteSectionDialog: false,
     snackbar: false,
     errorText: '',
     headers: [
@@ -101,6 +121,27 @@ export default {
     },
     editSection(id) {
       this.$router.push('/section/edit-section/' + id)
+    },
+    dialogSection(id) {
+      this.idDelele = id
+      this.deleteSectionDialog = true
+    },
+    deleteSection() {
+      Backend.deleteSection(this.idDelele)
+        .then((response) => {
+          this.deleteSectionDialog = false
+          this.snackbar = true
+          this.errorText = 'Section deleted successfully.'
+          Backend.getSections().then((response) => {
+            this.data = response.data
+          })
+        })
+        .catch((error) => {
+          if (error) {
+            this.snackbar = true
+            this.errorText = 'Something went wrong. Please try again later.'
+          }
+        })
     },
   },
   head: {

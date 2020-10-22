@@ -31,4 +31,7 @@ export default {
   updateSection(id, data) {
     return api.patch('/section/' + id, data)
   },
+  deleteSection(id) {
+    return api.delete(`/section/${id}`)
+  },
 }

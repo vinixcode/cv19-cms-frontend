@@ -5,7 +5,7 @@
       :items="data"
       sort-by="id"
       class="elevation-3 rounded-lg mt-10 mx-auto rule-card"
-      items-per-page="30"
+      :items-per-page="30"
     >
       <template v-slot:top>
         <v-toolbar class="light-blue darken-3 rounded-t-lg rule-card" flat>
@@ -63,7 +63,7 @@
     <!--/ Dialog Delete content -->
 
     <!-- Snackabr content -->
-    <v-snackbar v-model="snackbar" :multi-line="true" timeout="7000">
+    <v-snackbar v-model="snackbar" :multi-line="true" timeout="6000">
       {{ errorText }}
 
       <template v-slot:action="{ attrs }">
@@ -116,7 +116,7 @@ export default {
   },
   methods: {
     editContent(id) {
-      this.$router.push('/edit-content/' + id)
+      this.$router.push('/content/edit-content/' + id)
     },
     showContent(id) {
       this.$router.push('/content/show-content/' + id)
