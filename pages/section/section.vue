@@ -17,14 +17,14 @@
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <!-- <v-icon
+        <v-icon
           color="#014D4E"
           small
           class="mr-2"
-          @click="editSection(item.id)"
+          @click="editSection(item.section_id)"
         >
           mdi-pencil
-        </v-icon> -->
+        </v-icon>
         <!-- <v-icon
           color="red darken-4"
           small
@@ -43,6 +43,18 @@
         </v-icon>
       </template>
     </v-data-table>
+
+    <!-- Snackabr section -->
+    <v-snackbar v-model="snackbar" :multi-line="true" timeout="8500">
+      {{ errorText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+    <!--/ Snackabr section -->
   </div>
 </template>
 
@@ -50,6 +62,8 @@
 import Backend from '@/services/BackendService.js'
 export default {
   data: () => ({
+    snackbar: false,
+    errorText: '',
     headers: [
       { text: 'ID', value: 'section_id' },
       { text: 'Section Code', value: 'section_code' },
@@ -67,9 +81,26 @@ export default {
       console.log(this.data)
     })
   },
+  mounted() {
+    if (this.$route.query.msg === 'created') {
+      this.snackbar = true
+      this.errorText = 'Section created successfully.'
+    } else if (this.$route.query.msg === 'deleted') {
+      this.snackbar = true
+      this.errorText = 'Section deleted successfully.'
+    } else if (this.$route.query.msg === 'updated') {
+      this.snackbar = true
+      this.errorText = 'Section updated successfully.'
+    } else {
+      this.snackbar = false
+    }
+  },
   methods: {
     showSection(id) {
       this.$router.push('/section/show-section/' + id)
+    },
+    editSection(id) {
+      this.$router.push('/section/edit-section/' + id)
     },
   },
   head: {

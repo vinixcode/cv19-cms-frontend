@@ -15,16 +15,27 @@
         <v-form ref="form" class="text-center mx-5">
           <div>
             <v-text-field
-              v-model="section.id"
+              v-model="section.section_id"
               label="Section Id"
               filled
+              type="number"
               prepend-inner-icon="mdi-xml"
               placeholder="Id"
               disabled
             ></v-text-field>
 
             <v-text-field
-              v-model="section.section.code"
+              v-model="section.page_id"
+              label="Page Id"
+              filled
+              type="number"
+              prepend-inner-icon="mdi-xml"
+              placeholder="Section Code"
+              disabled
+            ></v-text-field>
+
+            <v-text-field
+              v-model="section.section_code"
               label="Section Code"
               filled
               prepend-inner-icon="mdi-xml"
@@ -32,69 +43,43 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="section.content.code"
-              label="Content Code"
-              filled
-              prepend-inner-icon="mdi-xml"
-              placeholder="Content Code"
-            />
-
-            <v-text-field
               v-model="section.sort"
               label="Sort"
               filled
               type="number"
               prepend-inner-icon="mdi-xml"
-              placeholder="Sort"
+              placeholder="Section Code"
             ></v-text-field>
 
             <v-text-field
-              v-model="section.content.title"
-              prepend-inner-icon="mdi-format-text"
-              label="Section Title"
+              v-model="section.display_id"
+              label="Display Id"
               filled
+              type="number"
+              prepend-inner-icon="mdi-xml"
+              placeholder="Sort"
+              disabled
             ></v-text-field>
 
-            <v-card class="my-2" elevation="4">
-              <v-system-bar
-                class="mb-5"
-                height="50px"
-                color="light-blue darken-3"
-                dark
-              >
-                <v-toolbar-title class="white--text px-5">
-                  Display Languages
-                </v-toolbar-title></v-system-bar
-              >
-              <div
-                v-for="display in section.content.body.display_languages"
-                :key="display.id"
-                class="px-5"
-              >
-                <v-textarea
-                  v-model="display.text"
-                  label="Section Body"
-                  filled
-                ></v-textarea>
-
-                <v-text-field
-                  v-model="display.lang"
-                  prepend-inner-icon="mdi-format-text"
-                  label="Section Language"
-                  filled
-                ></v-text-field>
-              </div>
-            </v-card>
+            <v-textarea
+              v-model="section.description"
+              label="Description"
+              filled
+              prepend-inner-icon="mdi-xml"
+              placeholder="Sort"
+            ></v-textarea>
           </div>
 
           <v-card-actions class="mb-5 pl-0">
-            <!-- <v-btn color="#FEAD01" dark @click="editContent(content.contentId)"
+            <v-btn color="#FEAD01" dark @click="editSection(section.section_id)"
               >Save</v-btn
             >
-            <v-btn color="red darken-4" dark @click="deleteContentDialog = true"
+            <!-- <v-btn color="red darken-4" dark @click="deleteContentDialog = true"
               >Delete</v-btn
             > -->
-            <v-btn color="grey lighten-1" dark to="/section">Back</v-btn>
+            <v-btn color="grey lighten-1" dark to="/section/section"
+              >Back</v-btn
+            >
           </v-card-actions>
         </v-form>
       </v-card>
@@ -133,56 +118,19 @@
 </template>
 
 <script>
-import Backend from '@/services/NodeService.js'
+import Backend from '@/services/BackendService.js'
 export default {
   data() {
     return {
       deleteContentDialog: false,
       snackbar: false,
       errorText: '',
-      section: {
-        id: '',
-        sort: '',
-        section: {
-          code: '',
-        },
-        content: {
-          code: '',
-          title: '',
-          body: {
-            display_languages: [],
-          },
-        },
-      },
+      section: {},
     }
   },
   created() {
     Backend.getASection(this.$route.params.id).then((response) => {
-      const data = response.data
-
-      if (data.content.title === null) {
-        this.section.content.title = ''
-      } else {
-        this.section.content.title = data.content.title
-      }
-
-      this.section.id = data.id
-      this.section.section.code = data.section.code
-      this.section.content.code = data.content.code
-      this.section.sort = data.sort
-      this.section.content.title = data.content.title
-
-      const dataText = []
-
-      for (let i = 0; i < data.content.body.display_languages.length; i++) {
-        dataText[i] = {
-          display_id: data.content.body.display_languages[i].display_id,
-          lang: data.content.body.display_languages[i].lang,
-          text: data.content.body.display_languages[i].text,
-        }
-        console.log(dataText[i])
-      }
-      this.section.content.body.display_languages = dataText
+      this.section = response.data
     })
   },
   methods: {
@@ -192,16 +140,19 @@ export default {
 
       return str.replace(/(<([^>]+)>)/gi, '')
     },
-    editContent(id) {
+    editSection(id) {
       const data = {
-        code: this.content.contentCode,
-        sort: this.content.sort,
-        title: this.content.nameDisplay.displayText,
-        body: this.content.descDisplay.displayText,
+        section_id: this.section.section_id,
+        section_code: this.section.section_code,
+        page_id: this.section.page_id,
+        sort: this.section.sort,
+        display_id: this.section.page_id,
+        description: this.section.description,
       }
-      Backend.updateContent(id, data)
+
+      Backend.updateSection(id, data)
         .then((response) => {
-          this.$router.push('/content/?msg=updated')
+          this.$router.push('/section/section/?msg=updated')
         })
         .catch((error) => {
           if (error) {

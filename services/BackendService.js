@@ -22,7 +22,13 @@ export default {
   getSections() {
     return api.get('/section')
   },
-  getAContentSection(id) {
+  getASection(id) {
     return api.get(`/section/${id}`)
+  },
+  getAContentSection(id) {
+    return api.get(`/sectionsContent/${id}`)
+  },
+  updateSection(id, data) {
+    return api.patch('/section/' + id, data)
   },
 }

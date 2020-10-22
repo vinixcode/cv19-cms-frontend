@@ -4,9 +4,6 @@ export default {
   // Environment variables
   env: {
     backendUrl: process.env.BACKEND_URL || 'https://127.0.0.1:8000',
-    UrlNodeService:
-      process.env.BACKEND_URL_NODE ||
-      'http://cv19checkupbackend-env.eba-pymgjyfx.us-east-1.elasticbeanstalk.com/',
   },
 
   // Target (https://go.nuxtjs.dev/config-target)
