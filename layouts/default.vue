@@ -70,7 +70,7 @@ export default {
         },
         {
           icon: 'mdi-image-frame',
-          title: 'Contents',
+          title: 'Content',
           to: '/content/all',
         },
         {

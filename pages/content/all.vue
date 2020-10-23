@@ -89,7 +89,6 @@ export default {
       { text: 'ID', value: 'contentId' },
       { text: 'Sort', value: 'sort' },
       { text: 'Code', value: 'contentCode' },
-      { text: 'Language', value: 'descDisplay.languageId' },
       { text: 'Actions', value: 'actions', sortable: false },
     ],
     data: [],

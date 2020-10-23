@@ -102,7 +102,7 @@ export default {
       const data = this.content
       Backend.createContent(data)
         .then((response) => {
-          this.$router.push('/content/?msg=created')
+          this.$router.push('/content/all/?msg=created')
         })
         .catch((error) => {
           if (error) {
