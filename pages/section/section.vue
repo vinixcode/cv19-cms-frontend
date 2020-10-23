@@ -18,7 +18,7 @@
           color="#014D4E"
           small
           class="mr-2"
-          @click="editSection(item.section_id)"
+          @click="editSection(item.id)"
         >
           mdi-pencil
         </v-icon>
@@ -26,7 +26,7 @@
           color="red darken-4"
           small
           class="mr-2"
-          @click="dialogSection(item.section_id)"
+          @click="dialogSection(item.id)"
         >
           mdi-trash-can-outline
         </v-icon>
@@ -34,7 +34,7 @@
           color="light-blue darken-3"
           small
           class="mr-2"
-          @click="showSection(item.section_id)"
+          @click="showSection(item.id)"
         >
           mdi-eye-outline
         </v-icon>
@@ -82,11 +82,11 @@ export default {
     snackbar: false,
     errorText: '',
     headers: [
-      { text: 'ID', value: 'section_id' },
-      { text: 'Section Code', value: 'section_code' },
-      { text: 'Page Id', value: 'page_id' },
+      { text: 'ID', value: 'id' },
+      { text: 'Section Code', value: 'sectionCode' },
+      { text: 'Page Id', value: 'pageId' },
       { text: 'Sort', value: 'sort' },
-      { text: 'Display Id', value: 'display_id' },
+      { text: 'Display Id', value: 'displayId' },
       { text: 'Description', value: 'description' },
       { text: 'Actions', value: 'actions', sortable: false },
     ],

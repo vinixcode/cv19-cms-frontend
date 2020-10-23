@@ -15,7 +15,7 @@
         <v-form ref="form" class="text-center mx-5">
           <div>
             <v-text-field
-              v-model="section.section_id"
+              v-model="section.id"
               label="Section Id"
               filled
               type="number"
@@ -25,7 +25,7 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="section.page_id"
+              v-model="section.pageId"
               label="Page Id"
               filled
               type="number"
@@ -35,7 +35,7 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="section.section_code"
+              v-model="section.sectionCode"
               label="Section Code"
               filled
               prepend-inner-icon="mdi-xml"
@@ -52,7 +52,7 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="section.display_id"
+              v-model="section.displayId"
               label="Display Id"
               filled
               type="number"
@@ -71,7 +71,7 @@
           </div>
 
           <v-card-actions class="mb-5 pl-0">
-            <v-btn color="#FEAD01" dark @click="editSection(section.section_id)"
+            <v-btn color="#FEAD01" dark @click="editSection(section.id)"
               >Save</v-btn
             >
             <v-btn color="red darken-4" dark @click="deleteSectionDialog = true"
@@ -95,7 +95,7 @@
           <v-spacer></v-spacer>
 
           <v-btn text @click="deleteSectionDialog = false"> Cancel </v-btn>
-          <v-btn color="red" text @click="deleteSection(section.section_id)">
+          <v-btn color="red" text @click="deleteSection(section.id)">
             Delete
           </v-btn>
         </v-card-actions>
@@ -136,11 +136,11 @@ export default {
   methods: {
     editSection(id) {
       const data = {
-        section_id: this.section.section_id,
-        section_code: this.section.section_code,
-        page_id: this.section.page_id,
+        section_id: this.section.id,
+        section_code: this.section.sectionCode,
+        page_id: this.section.pageid,
         sort: this.section.sort,
-        display_id: this.section.page_id,
+        display_id: this.section.displayId,
         description: this.section.description,
       }
 
