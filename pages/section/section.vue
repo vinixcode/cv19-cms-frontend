@@ -11,9 +11,6 @@
         <v-toolbar class="light-blue darken-3 rounded-t-lg rule-card" flat>
           <v-toolbar-title class="white--text">Sections</v-toolbar-title>
           <v-spacer></v-spacer>
-          <!-- <nuxt-link class="text-decoration-none" to="/create-content">
-            <v-btn color="#FEAD01" dark class="">Create Section</v-btn>
-          </nuxt-link> -->
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">

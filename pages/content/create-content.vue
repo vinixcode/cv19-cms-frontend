@@ -21,6 +21,7 @@
               prepend-inner-icon="mdi-xml"
               placeholder="Code"
             ></v-text-field>
+
             <v-text-field
               v-model="content.sort"
               :rules="validationRules.sort"
@@ -29,6 +30,7 @@
               placeholder="Sort"
               type="number"
             ></v-text-field>
+
             <v-text-field
               v-model="content.title"
               filled
@@ -48,15 +50,6 @@
               >Create Content</v-btn
             >
           </v-card-actions>
-
-          <!-- <v-expansion-panels v-model="panel" :readonly="readonly" multiple>
-            <v-expansion-panel class="mb-8">
-              <v-expansion-panel-header
-                >Associated Rule</v-expansion-panel-header
-              >
-              <v-expansion-panel-content> Rule </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels> -->
         </v-form>
       </v-card>
 

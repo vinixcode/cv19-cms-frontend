@@ -62,17 +62,10 @@
             <v-btn color="red darken-4" dark @click="deleteContentDialog = true"
               >Delete</v-btn
             >
-            <v-btn color="grey lighten-1" dark to="/content">Back</v-btn>
+            <v-btn color="grey lighten-1" dark to="/content/content"
+              >Back</v-btn
+            >
           </v-card-actions>
-
-          <!-- <v-expansion-panels v-model="panel" :readonly="readonly" multiple>
-            <v-expansion-panel class="mb-8">
-              <v-expansion-panel-header
-                >Associated Rule</v-expansion-panel-header
-              >
-              <v-expansion-panel-content> Rule </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels> -->
         </v-form>
       </v-card>
     </v-flex>
@@ -111,15 +104,7 @@
 
 <script>
 import Backend from '@/services/BackendService.js'
-// let VueEditor
-
-// if (process.client) {
-//   VueEditor = require('vue2-editor').VueEditor
-// }
 export default {
-  // components: {
-  //   VueEditor,
-  // },
   data() {
     return {
       deleteContentDialog: false,

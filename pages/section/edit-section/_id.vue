@@ -74,9 +74,9 @@
             <v-btn color="#FEAD01" dark @click="editSection(section.section_id)"
               >Save</v-btn
             >
-            <!-- <v-btn color="red darken-4" dark @click="deleteContentDialog = true"
+            <v-btn color="red darken-4" dark @click="deleteSectionDialog = true"
               >Delete</v-btn
-            > -->
+            >
             <v-btn color="grey lighten-1" dark to="/section/section"
               >Back</v-btn
             >
@@ -86,7 +86,7 @@
     </v-flex>
 
     <!--Dialog Delete content -->
-    <v-dialog v-model="deleteContentDialog" max-width="400">
+    <v-dialog v-model="deleteSectionDialog" max-width="400">
       <v-card>
         <v-card-title class="headline">Are you sure?</v-card-title>
         <v-card-text> This action cannot be reversed. </v-card-text>
@@ -94,8 +94,8 @@
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn text @click="deleteContentDialog = false"> Cancel </v-btn>
-          <v-btn color="red" text @click="deleteContent(content.contentId)">
+          <v-btn text @click="deleteSectionDialog = false"> Cancel </v-btn>
+          <v-btn color="red" text @click="deleteSection(section.section_id)">
             Delete
           </v-btn>
         </v-card-actions>
@@ -122,7 +122,7 @@ import Backend from '@/services/BackendService.js'
 export default {
   data() {
     return {
-      deleteContentDialog: false,
+      deleteSectionDialog: false,
       snackbar: false,
       errorText: '',
       section: {},
@@ -155,10 +155,10 @@ export default {
           }
         })
     },
-    deleteContent(id) {
-      Backend.deleteContent(id)
+    deleteSection(id) {
+      Backend.deleteSection(id)
         .then((response) => {
-          this.$router.push('/content/?msg=deleted')
+          this.$router.push('/section/section/?msg=deleted')
         })
         .catch((error) => {
           if (error) {

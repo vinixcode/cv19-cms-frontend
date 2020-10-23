@@ -14,6 +14,7 @@
           >
             <v-icon size="60" color="white">mdi-account</v-icon>
           </v-avatar>
+
           <v-text-field
             class="mt-5"
             filled

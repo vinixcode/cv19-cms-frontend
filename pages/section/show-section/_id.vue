@@ -26,22 +26,6 @@
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <!-- <v-icon
-          color="#014D4E"
-          small
-          class="mr-2"
-          @click="editSection(item.id)"
-        >
-          mdi-pencil
-        </v-icon> -->
-        <!-- <v-icon
-          color="red darken-4"
-          small
-          class="mr-2"
-          @click="dialogContent(item.contentId)"
-        >
-          mdi-trash-can-outline
-        </v-icon> -->
         <v-icon
           color="light-blue darken-3"
           small
@@ -57,7 +41,6 @@
 
 <script>
 import Backend from '@/services/BackendService.js'
-
 export default {
   data() {
     return {
@@ -78,7 +61,6 @@ export default {
   created() {
     Backend.getAContentSection(this.$route.params.id).then((response) => {
       this.data = response.data
-      console.log(this.data)
       this.section = response.data[0].section_code
     })
   },

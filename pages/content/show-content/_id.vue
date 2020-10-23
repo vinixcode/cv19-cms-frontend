@@ -81,7 +81,6 @@
 
 <script>
 import Backend from '@/services/BackendService.js'
-
 export default {
   data() {
     return {
@@ -129,7 +128,7 @@ export default {
     deleteContent(id) {
       Backend.deleteContent(id)
         .then((response) => {
-          this.$router.push('/content/?msg=deleted')
+          this.$router.push('/content/content/?msg=deleted')
         })
         .catch((error) => {
           if (error) {
