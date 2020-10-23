@@ -63,12 +63,13 @@ export default {
     return {
       section: '',
       headers: [
-        { text: 'Content Id', value: 'content_id' },
+        { text: 'Id', value: 'content_id' },
         { text: 'Code', value: 'code' },
-        { text: 'report_code', value: 'report_code' },
-        { text: 'report_descriptio', value: 'report_descriptio' },
-        { text: 'section_id', value: 'section_id' },
-        { text: 'language_id', value: 'language_id' },
+        { text: 'Report Code', value: 'report_code' },
+        { text: 'Report Description', value: 'report_descriptio' },
+        { text: 'Section Id', value: 'section_id' },
+        { text: 'Content Sort', value: 'content_sort' },
+        { text: 'Language', value: 'language_id' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       data: [],
@@ -77,6 +78,7 @@ export default {
   created() {
     Backend.getAContentSection(this.$route.params.id).then((response) => {
       this.data = response.data
+      console.log(this.data)
       this.section = response.data[0].section_code
     })
   },
