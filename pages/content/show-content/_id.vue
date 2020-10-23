@@ -5,7 +5,7 @@
         color="grey lighten-1"
         class="px-8 mr-1 mr-sm-2 mb-2"
         dark
-        to="/content/content"
+        to="/content/all"
         >Back</v-btn
       >
       <v-btn
@@ -128,7 +128,7 @@ export default {
     deleteContent(id) {
       Backend.deleteContent(id)
         .then((response) => {
-          this.$router.push('/content/content/?msg=deleted')
+          this.$router.push('/content/all/?msg=deleted')
         })
         .catch((error) => {
           if (error) {

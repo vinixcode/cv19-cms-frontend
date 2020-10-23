@@ -66,12 +66,12 @@ export default {
         {
           icon: 'mdi-ruler',
           title: 'Sections',
-          to: '/section/section',
+          to: '/section/all',
         },
         {
           icon: 'mdi-image-frame',
           title: 'Contents',
-          to: '/content/content',
+          to: '/content/all',
         },
         {
           icon: 'mdi-clipboard-edit',

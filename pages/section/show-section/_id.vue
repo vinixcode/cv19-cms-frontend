@@ -4,7 +4,7 @@
       color="grey lighten-1"
       class="px-8 mr-1 mr-sm-2 mt-2"
       dark
-      to="/section/section"
+      to="/section/all"
       >Back</v-btn
     >
     <v-data-table

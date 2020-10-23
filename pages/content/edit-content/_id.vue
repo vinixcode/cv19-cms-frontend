@@ -62,9 +62,7 @@
             <v-btn color="red darken-4" dark @click="deleteContentDialog = true"
               >Delete</v-btn
             >
-            <v-btn color="grey lighten-1" dark to="/content/content"
-              >Back</v-btn
-            >
+            <v-btn color="grey lighten-1" dark to="/content/all">Back</v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -154,7 +152,7 @@ export default {
       }
       Backend.updateContent(id, data)
         .then((response) => {
-          this.$router.push('/content/content/?msg=updated')
+          this.$router.push('/content/all/?msg=updated')
         })
         .catch((error) => {
           if (error) {
@@ -166,7 +164,7 @@ export default {
     deleteContent(id) {
       Backend.deleteContent(id)
         .then((response) => {
-          this.$router.push('/content/content/?msg=deleted')
+          this.$router.push('/content/all/?msg=deleted')
         })
         .catch((error) => {
           if (error) {

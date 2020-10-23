@@ -77,9 +77,7 @@
             <v-btn color="red darken-4" dark @click="deleteSectionDialog = true"
               >Delete</v-btn
             >
-            <v-btn color="grey lighten-1" dark to="/section/section"
-              >Back</v-btn
-            >
+            <v-btn color="grey lighten-1" dark to="/section/all">Back</v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -146,7 +144,7 @@ export default {
 
       Backend.updateSection(id, data)
         .then((response) => {
-          this.$router.push('/section/section/?msg=updated')
+          this.$router.push('/section/all/?msg=updated')
         })
         .catch((error) => {
           if (error) {
@@ -158,7 +156,7 @@ export default {
     deleteSection(id) {
       Backend.deleteSection(id)
         .then((response) => {
-          this.$router.push('/section/section/?msg=deleted')
+          this.$router.push('/section/all/?msg=deleted')
         })
         .catch((error) => {
           if (error) {
