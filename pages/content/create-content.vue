@@ -1,84 +1,80 @@
 <template>
-  <v-layout>
-    <v-flex xs12 class="d-flex">
-      <v-card class="mt-5 mb-10 mx-10" elevation="4">
-        <v-system-bar
-          class="mb-10"
-          height="50px"
-          color="light-blue darken-3"
-          dark
-        >
-          <v-toolbar-title class="white--text px-5"
-            >Create Content</v-toolbar-title
-          ></v-system-bar
-        >
-        <v-form ref="form" v-model="valid" class="text-center mx-5">
-          <div>
-            <v-text-field
-              v-model="content.code"
-              :rules="validationRules.code"
-              filled
-              prepend-inner-icon="mdi-xml"
-              placeholder="Code"
-            ></v-text-field>
+  <v-container class="d-flex justify-center">
+    <v-card class="mt-5 mb-10 mx-10" elevation="4" width="85%">
+      <v-system-bar
+        class="mb-10"
+        height="50px"
+        color="light-blue darken-3"
+        dark
+      >
+        <v-toolbar-title class="white--text px-5"
+          >Create Content</v-toolbar-title
+        ></v-system-bar
+      >
+      <v-form ref="form" v-model="valid" class="text-center mx-5">
+        <div>
+          <v-text-field
+            v-model="content.code"
+            :rules="validationRules.code"
+            filled
+            prepend-inner-icon="mdi-xml"
+            label="Code"
+          ></v-text-field>
 
-            <v-text-field
-              v-model="content.sort"
-              :rules="validationRules.sort"
-              filled
-              prepend-inner-icon="mdi-xml"
-              placeholder="Sort"
-              type="number"
-            ></v-text-field>
+          <v-text-field
+            v-model="content.sort"
+            :rules="validationRules.sort"
+            filled
+            prepend-inner-icon="mdi-order-numeric-ascending"
+            label="Sort"
+            type="number"
+          ></v-text-field>
 
-            <v-text-field
-              v-model="content.title"
-              filled
-              prepend-inner-icon="mdi-format-text"
-              placeholder="Title"
-            ></v-text-field>
+          <v-text-field
+            v-model="content.title"
+            filled
+            prepend-inner-icon="mdi-format-text"
+            label="Title"
+          ></v-text-field>
 
-            <vue-editor v-model="content.body"></vue-editor>
-          </div>
+          <v-textarea
+            v-model="content.body"
+            prepend-inner-icon="mdi-tooltip-text-outline"
+            label="Body"
+            filled
+          ></v-textarea>
+        </div>
 
-          <v-card-actions class="my-5 pl-0">
-            <v-btn
-              color="warning"
-              class="btn-create"
-              :disabled="!valid"
-              @click="createContent"
-              >Create Content</v-btn
-            >
-          </v-card-actions>
-        </v-form>
-      </v-card>
+        <v-card-actions class="my-5 pl-0">
+          <v-btn
+            color="warning"
+            class="btn-create"
+            :disabled="!valid"
+            @click="createContent"
+            >Create Content</v-btn
+          >
+        </v-card-actions>
+      </v-form>
+    </v-card>
 
-      <!-- Snackabr content -->
-      <v-snackbar v-model="snackbar" :multi-line="true" timeout="7000">
-        {{ errorText }}
+    <!-- Snackbar content -->
+    <v-snackbar v-model="snackbar" :multi-line="true" timeout="7000">
+      {{ errorText }}
 
-        <template v-slot:action="{ attrs }">
-          <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
-            Close
-          </v-btn>
-        </template>
-      </v-snackbar>
-      <!--/ Snackabr content -->
-    </v-flex>
-  </v-layout>
+      <template v-slot:action="{ attrs }">
+        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+    <!--/ Snackbar content -->
+  </v-container>
 </template>
 
 <script>
 import Backend from '@/services/BackendService.js'
-let VueEditor
 
-if (process.client) {
-  VueEditor = require('vue2-editor').VueEditor
-}
 export default {
-  components: {
-    VueEditor,
-  },
   data() {
     return {
       valid: false,
@@ -102,7 +98,9 @@ export default {
       const data = this.content
       Backend.createContent(data)
         .then((response) => {
-          this.$router.push('/content/all/?msg=created')
+          this.$router.push(
+            `/content/show-content/${response.data.contentId}?msg=created`
+          )
         })
         .catch((error) => {
           if (error) {

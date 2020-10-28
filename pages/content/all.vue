@@ -62,7 +62,7 @@
     </v-dialog>
     <!--/ Dialog Delete content -->
 
-    <!-- Snackabr content -->
+    <!-- Snackbar content -->
     <v-snackbar v-model="snackbar" :multi-line="true" timeout="6000">
       {{ errorText }}
 
@@ -72,7 +72,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <!--/ Snackabr content -->
+    <!--/ Snackbar content -->
   </div>
 </template>
 

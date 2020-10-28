@@ -84,9 +84,9 @@ export default {
     headers: [
       { text: 'ID', value: 'id' },
       { text: 'Section Code', value: 'sectionCode' },
-      { text: 'Page Id', value: 'pageId' },
+      { text: 'Page ID', value: 'pageId' },
       { text: 'Sort', value: 'sort' },
-      { text: 'Display Id', value: 'displayId' },
+      { text: 'Display ID', value: 'displayId' },
       { text: 'Description', value: 'description' },
       { text: 'Actions', value: 'actions', sortable: false },
     ],

@@ -16,10 +16,9 @@
           <div>
             <v-text-field
               v-model="content.contentId"
-              label="Content Id"
+              label="ID"
               filled
-              prepend-inner-icon="mdi-xml"
-              placeholder="Code"
+              prepend-inner-icon="mdi-identifier"
               disabled
             ></v-text-field>
 
@@ -28,16 +27,14 @@
               label="Code"
               filled
               prepend-inner-icon="mdi-xml"
-              placeholder="Code"
             ></v-text-field>
 
             <v-text-field
               v-model="content.sort"
               label="Sort"
               filled
-              prepend-inner-icon="mdi-xml"
+              prepend-inner-icon="mdi-order-numeric-ascending"
               type="number"
-              placeholder="Sort"
             />
 
             <v-text-field
@@ -45,11 +42,11 @@
               label="Title"
               filled
               prepend-inner-icon="mdi-format-text"
-              placeholder="Title"
             ></v-text-field>
 
             <v-textarea
               v-model="content.descDisplay.displayText"
+              prepend-inner-icon="mdi-tooltip-text-outline"
               label="Body"
               filled
             ></v-textarea>
@@ -62,7 +59,9 @@
             <v-btn color="red darken-4" dark @click="deleteContentDialog = true"
               >Delete</v-btn
             >
-            <v-btn color="grey lighten-1" dark to="/content/all">Back</v-btn>
+            <v-btn color="grey lighten-1" dark to="/content/all"
+              >&laquo; Back</v-btn
+            >
           </v-card-actions>
         </v-form>
       </v-card>

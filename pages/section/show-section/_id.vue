@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <v-btn
-      color="grey lighten-1"
-      class="px-8 mr-1 mr-sm-2 mt-2"
-      dark
-      to="/section/all"
-      >Back</v-btn
-    >
+  <v-container class="d-flex flex-column justify-center">
+    <div>
+      <v-btn
+        color="grey lighten-1"
+        class="px-8 mr-1 mr-sm-2 mt-2"
+        dark
+        to="/section/all"
+        >&laquo; Back</v-btn
+      >
+    </div>
     <v-data-table
       :headers="headers"
       :items="data"
@@ -17,7 +19,7 @@
       <template v-slot:top>
         <v-toolbar class="light-blue darken-3 rounded-t-lg rule-card" flat>
           <v-toolbar-title class="white--text"
-            >Content by <b>{{ section }}</b> Section</v-toolbar-title
+            >Content by Section: <b>{{ section }}</b></v-toolbar-title
           >
           <v-spacer></v-spacer>
           <nuxt-link class="text-decoration-none" to="/create-content">
@@ -26,17 +28,26 @@
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-icon
-          color="light-blue darken-3"
-          small
-          class="mr-2"
-          @click="showContent(item.content_id)"
+        <v-btn
+          icon
+          x-small
+          color="#014D4E"
+          :to="'/content/edit-content/' + item.content_id"
         >
-          mdi-eye-outline
-        </v-icon>
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+
+        <v-btn
+          icon
+          x-small
+          color="light-blue darken-3"
+          :to="'/content/show-content/' + item.content_id"
+        >
+          <v-icon>mdi-eye-outline</v-icon>
+        </v-btn>
       </template>
     </v-data-table>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -63,11 +74,6 @@ export default {
       this.data = response.data
       this.section = response.data[0].section_code
     })
-  },
-  methods: {
-    showContent(id) {
-      this.$router.push('/content/show-content/' + id)
-    },
   },
   head: {
     title: 'Content by Section',

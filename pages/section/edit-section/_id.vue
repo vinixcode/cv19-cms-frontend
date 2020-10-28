@@ -16,30 +16,27 @@
           <div>
             <v-text-field
               v-model="section.id"
-              label="Section Id"
+              label="ID"
               filled
               type="number"
-              prepend-inner-icon="mdi-xml"
-              placeholder="Id"
+              prepend-inner-icon="mdi-identifier"
               disabled
             ></v-text-field>
 
             <v-text-field
               v-model="section.pageId"
-              label="Page Id"
+              label="Page ID"
               filled
               type="number"
-              prepend-inner-icon="mdi-xml"
-              placeholder="Section Code"
+              prepend-inner-icon="mdi-identifier"
               disabled
             ></v-text-field>
 
             <v-text-field
               v-model="section.sectionCode"
-              label="Section Code"
+              label="Code"
               filled
               prepend-inner-icon="mdi-xml"
-              placeholder="Section Code"
             ></v-text-field>
 
             <v-text-field
@@ -47,17 +44,15 @@
               label="Sort"
               filled
               type="number"
-              prepend-inner-icon="mdi-xml"
-              placeholder="Section Code"
+              prepend-inner-icon="mdi-order-numeric-ascending"
             ></v-text-field>
 
             <v-text-field
               v-model="section.displayId"
-              label="Display Id"
+              label="Display ID"
               filled
               type="number"
-              prepend-inner-icon="mdi-xml"
-              placeholder="Sort"
+              prepend-inner-icon="mdi-identifier"
               disabled
             ></v-text-field>
 
@@ -65,8 +60,7 @@
               v-model="section.description"
               label="Description"
               filled
-              prepend-inner-icon="mdi-xml"
-              placeholder="Sort"
+              prepend-inner-icon="mdi-tooltip-text-outline"
             ></v-textarea>
           </div>
 
@@ -77,7 +71,9 @@
             <v-btn color="red darken-4" dark @click="deleteSectionDialog = true"
               >Delete</v-btn
             >
-            <v-btn color="grey lighten-1" dark to="/section/all">Back</v-btn>
+            <v-btn color="grey lighten-1" dark to="/section/all"
+              >&laquo; Back</v-btn
+            >
           </v-card-actions>
         </v-form>
       </v-card>
